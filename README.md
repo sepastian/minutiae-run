@@ -11,5 +11,5 @@ Requires [Docker](https://docs.docker.com/engine/install/) installed on your mac
 Then, run:
 
 ```
-curl -fsSL https://raw.githubusercontent.com/sepastian/minutiae-pdf-runner/master/bin/run-minutiae-pdf-runner | bash
+curl -fsSL https://github.com/sepastian/minutiae-pdf-service/raw/master/bin/run-minutiae-pdf-service | bash
 ```
