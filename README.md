@@ -6,10 +6,12 @@ Easily run minutiae-pdf-service locally.
 
 Run the Minutiae PDF service locally.
 
-Requires [Docker](https://docs.docker.com/engine/install/) installed on your machine and a Github [personal access token](https://github.com/settings/tokens).
-
-Then, run:
-
 ```
 curl -fsSL https://github.com/sepastian/minutiae-pdf-service-runner/raw/main/bin/run-minutiae-pdf-service | bash
 ```
+
+## Prerequisites
+
+* [Docker](https://docs.docker.com/engine/install/) installed on your machine
+* a Github [personal access token](https://github.com/settings/tokens)
+* a `credentials.json` file in the current working directory
