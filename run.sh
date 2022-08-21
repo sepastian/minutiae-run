@@ -13,6 +13,9 @@ fi
 printf "Found ${credentials_path}.\n"
 
 cat << EOF
+
+*****
+
 Logging in with Github.
 
 Simply press ENTER, if you are already logged in.
@@ -36,9 +39,13 @@ EOF
 
 url='https://raw.githubusercontent.com/sepastian/minutiae-pdf-service-runner/main/docker-compose.yml'
 cat << EOF
+
+*****
+
 Fetching docker-compose.yml.
 EOF
-wget --no-clobber "${url}"
+curl --silent "${url}" > docker-compose.yml
+echo $?
 if [[ ! -f docker-compose.yml ]];
 then
     cat <<-EOF
@@ -46,5 +53,7 @@ then
 EOF
 exit 1
 fi
+
+docker-compose up
 
 echo "Done, bye!"
