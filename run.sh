@@ -42,10 +42,9 @@ cat << EOF
 
 *****
 
-Fetching docker-compose.yml.
+Fetching docker-compose.yml from ${url}.
 EOF
 curl --silent "${url}" > docker-compose.yml
-echo $?
 if [[ ! -f docker-compose.yml ]];
 then
     cat <<-EOF
