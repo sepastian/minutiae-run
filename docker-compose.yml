@@ -1,0 +1,45 @@
+version: "3.4"
+services:
+  minutiae-moments-service:
+    image: ghcr.io/sepastian/minutiae-moments-service:1
+    container_name: minutiae-moments-service
+    environment:
+      - REDIS_HOST=redis
+      - GOOGLE_APPLICATION_CREDENTIALS=/run/secrets/google_app_credentials
+      - MINUTIAE_TZ_RESOLVER_HOST=minutiae-tz-resolver
+      - LOG_LEVEL=DEBUG
+    secrets:
+      - google_app_credentials
+  minutiae-pdf-service:
+    image: ghcr.io/sepastian/minutiae-pdf-service:2
+    container_name: minutiae-pdf-service
+    environment:
+      - BUCKET_NAME=minutiae-production.appspot.com
+      - GOOGLE_APPLICATION_CREDENTIALS=/run/secrets/google_app_credentials
+      - LOG_LEVEL=DEBUG
+    secrets:
+      - google_app_credentials
+  # minutiae-poster-service:
+  #   image: ghcr.io/sepastian/minutiae-poster-service:2
+  #   container_name: minutiae-poster-service
+  #   environment:
+  #     - BUCKET_NAME=minutiae-production.appspot.com
+  #     - GOOGLE_APPLICATION_CREDENTIALS=/run/secrets/google_app_credentials
+  #     - LOG_LEVEL=DEBUG
+  #   secrets:
+  #     - google_app_credentials
+  #   volumes:
+  #     - ./minutiae/pdfs:/tmp/pdfs
+  minutiae-tz-resolver:
+    image: ghcr.io/sepastian/minutiae-tz-resolver:2
+    container_name: minutiae-tz-resolver
+    environment:
+      REDIS_HOST: redis
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+secrets:
+  google_app_credentials:
+    file: ${PWD}/credentials.json

@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+#set -x
+
 cat <<EOF
 Looking for credentials.json.
 EOF
@@ -23,9 +25,16 @@ Settings > Developer settings > Personal access tokens
 and create a token with read 'read:packages' permission.
 
 EOF
-read -e -p "Enter your Github username: " GITHUB_USERNAME
-docker login ghcr.io --username "$GITHUB_USERNAME" || {
-  echo "Error logging in with Github, aborting."
+#read -p "Enter your Github username: " GITHUB_USERNAME
+docker login ghcr.io || {
+  cat <<-EOF
+  Error logging in with Github, aborting.
+  Login with ghcr.io first with:
+
+  docker login ghcr.io
+
+  Then run this script again.
+EOF
   exit 1
 }
 
@@ -79,3 +88,9 @@ docker run --rm --detach \
 docker ps
 
 echo "Ready to render."
+
+answer=""
+while [[ $answer != "exit" ]]
+do
+    read -p "Type 'exit' + ENTER to stop all containers and exit. " answer
+done
