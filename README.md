@@ -7,7 +7,7 @@ Easily run minutiae-pdf-service locally.
 Run the Minutiae PDF service locally.
 
 ```
-curl -fsSL https://github.com/sepastian/minutiae-pdf-service-runner/raw/main/bin/run-minutiae-pdf-service | bash
+curl -fsSL https://raw.githubusercontent.com/sepastian/minutiae-pdf-service-runner/main/run.sh' | bash
 ```
 
 ## Prerequisites
