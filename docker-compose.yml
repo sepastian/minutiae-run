@@ -10,6 +10,8 @@ services:
       - LOG_LEVEL=DEBUG
     secrets:
       - google_app_credentials
+    ports:
+      - "3001:80"
   minutiae-pdf-service:
     image: ghcr.io/sepastian/minutiae-pdf-service:2
     container_name: minutiae-pdf-service
@@ -19,6 +21,8 @@ services:
       - LOG_LEVEL=DEBUG
     secrets:
       - google_app_credentials
+    ports:
+      - "3002:80"
   # minutiae-poster-service:
   #   image: ghcr.io/sepastian/minutiae-poster-service:2
   #   container_name: minutiae-poster-service
