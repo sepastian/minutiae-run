@@ -12,37 +12,12 @@ if [[ ! -r "${credentials_path}" ]]; then
 fi
 printf "Found ${credentials_path}.\n"
 
-cat << EOF
-
-*****
-
-Logging in with Github.
-
-Simply press ENTER, if you are already logged in.
-
-When asked for a password, enter your Personal Access Token (PAT).
-If required, create a PAT by logging in with github.com, then select
-Settings > Developer settings > Personal access tokens
-and create a token with read 'read:packages' permission.
-EOF
-docker login ghcr.io || {
-  cat <<-EOF
-  Error logging in with Github, aborting.
-  Login with ghcr.io first with:
-
-  docker login ghcr.io
-
-  Then run this script again.
-EOF
-  exit 1
-}
-
 url='https://raw.githubusercontent.com/sepastian/minutiae-pdf-service-runner/main/docker-compose.yml'
 cat << EOF
 
 *****
 
-Fetching docker-compose.yml from ${url}.
+Downloading docker-compose.yml from ${url}.
 EOF
 curl --silent "${url}" > docker-compose.yml
 if [[ ! -f docker-compose.yml ]];
@@ -53,6 +28,7 @@ EOF
 exit 1
 fi
 
-docker-compose up
+echo "Starting Docker containers."
+docker-compose up --remove-orphans
 
 echo "Done, bye!"
