@@ -9,5 +9,4 @@ curl -fsSL 'https://raw.githubusercontent.com/sepastian/minutiae-pdf-service-run
 **Prerequisites**
 
 * [Docker](https://docs.docker.com/engine/install/) installed on your machine
-* a Github [personal access token](https://github.com/settings/tokens)
 * a `credentials.json` file in the current working directory.
