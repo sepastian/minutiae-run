@@ -1,34 +1,31 @@
-#!/bin/bash
+#!/bin/sh
 
-set -euo pipefail
+set -eu
 
-cat <<EOF
-Looking for ./credentials.json in current directory.
-EOF
-credentials_path="$(realpath ${PWD})/credentials.json"
-if [[ ! -r "${credentials_path}" ]]; then
-  echo "Cannot find ${credentials_path}, aborting."
+ok="\033[32m✓ "
+err="\033[31m✕ "
+inf="\033[34m➔ "
+end="\033[0m"
+
+echo "${inf}Looking for ./credentials.json in current directory.${end}"
+credentials_path="$( cd $(dirname ${0}); pwd -P )/credentials.json"
+if [ ! -r "${credentials_path}" ]; then
+  echo "${err}Cannot find ${credentials_path}, aborting.${end}"
   exit 1
 fi
-printf "Found ${credentials_path}.\n"
+echo "${ok}Found ${credentials_path}.${end}"
 
 url='https://raw.githubusercontent.com/sepastian/minutiae-pdf-service-runner/main/docker-compose.yml'
-cat << EOF
-
-*****
-
-Downloading docker-compose.yml from ${url}.
-EOF
+echo "${inf}Downloading docker-compose.yml from ${url}.${end}"
 curl --silent "${url}" > docker-compose.yml
-if [[ ! -f docker-compose.yml ]];
+if [ ! -f docker-compose.yml ];
 then
-    cat <<-EOF
-    Error fetching docker-compose.yml, aborting.
-EOF
-exit 1
+    echo "${err}Error fetching docker-compose.yml, aborting.${end}"
+    exit 1
 fi
 
-echo "Starting Docker containers."
-docker-compose up --remove-orphans
+echo "${inf}Starting Docker containers.${end}"
+docker-compose pull
+docker-compose up
 
-echo "Done, bye!"
+echo "${inf}Done, bye!${end}"
