@@ -1,16 +1,12 @@
-# minutiae-pdf-service-runner
+# minutiae-run
 
-Easily run minutiae-pdf-service locally.
-
-# Quickstart
+🪄 run minutiae services locally.
 
 ```
-curl -fsSL \
-  'https://raw.githubusercontent.com/sepastian/minutiae-pdf-service-runner/main/run.sh' \
-  | bash
+curl -fsSL 'https://raw.githubusercontent.com/sepastian/minutiae-pdf-service-runner/main/run.sh' | sh
 ```
 
-## Prerequisites
+**Prerequisites**
 
 * [Docker](https://docs.docker.com/engine/install/) installed on your machine
 * a Github [personal access token](https://github.com/settings/tokens)
