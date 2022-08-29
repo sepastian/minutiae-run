@@ -23,6 +23,8 @@ services:
       - google_app_credentials
     ports:
       - "3002:80"
+    volumes:
+      - ./minutiae/pdfs:/tmp/pdfs
   # minutiae-poster-service:
   #   image: ghcr.io/sepastian/minutiae-poster-service:2
   #   container_name: minutiae-poster-service
